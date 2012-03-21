@@ -1,0 +1,9 @@
+# Path of your local ffmpeg
+ffmpeg_path: /usr/local/bin/ffmpeg
+
+# Folders with master files.
+# These folders will be symlinked at the first request to the
+# standard input path: Rails.root/public/video/input
+input_folders:
+  folder1: /Users/YourName/Movies/folder1
+  folder2: /Users/YourName/Movies/folder2

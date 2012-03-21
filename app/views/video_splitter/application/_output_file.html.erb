@@ -1,0 +1,21 @@
+<%
+  # You can override this whole partial by placing a file with the same name
+  # in the same path (Rails.root/app/views/video_splitter/application)
+  # of your host application...
+%>
+
+<h3 class="accordion" title="<%= output_file %>">
+  <%= ( (output_file.length > 35) ? truncate(output_file, :length => 35) : output_file ) %>
+  <div class="play-delete-clip">
+    <button class="play">play</button>
+    <button class="delete">delete</button>
+  </div>
+</h3>
+
+
+<%
+  # Or you can override only the form partial in the same way.
+  # In this case you'll conserve the collapsible accordion behavior.
+%>
+
+<%= render :partial => "video_splitter/application/form" %>

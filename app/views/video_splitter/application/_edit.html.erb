@@ -1,0 +1,23 @@
+<div id="videosplitterWrapper">
+  <%= render :partial => 'video_splitter/application/input' %>
+  <div class="videosplitter">
+    <div class="preview"></div>
+  </div>
+  <%= render :partial => 'video_splitter/application/output' %>
+  <div class="clear"></div >
+  <div id="subclips"></div>
+</div>
+
+<%= hidden_field_tag :video_splitter_callbacks, @callbacks if @callbacks.to_s.any? %>
+
+<script>
+
+  var options = {
+    inPath: '<%= VideoSplitter::Constants::INPUT_ROOT_PATH %>',
+    outPath: '<%= VideoSplitter::Constants::OUTPUT_ROOT_PATH %>'
+  }
+  
+  $("#media_output .accordion.buttons.scrollable").setUp( $.extend(options, {resizeWidth :true}) );
+  $("#media_input .tree.scrollable").setUp(options);
+
+</script>

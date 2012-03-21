@@ -1,0 +1,411 @@
+.videosplitter{
+  width:420px;
+  float:left;
+}
+
+.videosplitter .master {
+  width:420px;
+  height:340px;
+  float:left;
+  background:#000;
+}
+.videosplitter .preview {
+  width:420px;
+  height:340px;
+  float:left;
+  margin-left:0px;
+  background:#000;
+}
+
+/* Start: markers */
+div.mejs-markers-off,div.mejs-markers-on{
+  width:25px !important;
+}
+
+.mejs-controls .mejs-markIn-button.mejs-markers-off button{
+  background-position: -130px -16px;
+}
+
+
+.mejs-controls .mejs-markOut-button.mejs-markers-off button{
+  background-position: -142px -16px;
+}
+
+.mejs-controls .mejs-markIn-button.mejs-markers-on button{
+  background-position: -130px 0px;
+}
+
+.mejs-controls .mejs-markOut-button.mejs-markers-on button{
+  background-position: -142px 0px;
+}
+
+/* End: markers */
+
+.mejs-controls .mejs-breakLine{
+  width:1px !important;
+  clear:left !important;
+}
+
+
+.mejs-container .mejs-controls .mejs-time-in, .mejs-container .mejs-controls .mejs-time-out {
+  color: #666;
+  display: block;
+  height: 17px;
+  width: auto;
+  padding: 8px 3px 0 3px ;
+  overflow: hidden;
+  text-align: center;
+  padding: auto 4px;
+}
+.mejs-container .mejs-controls .mejs-time-in span, .mejs-container .mejs-controls .mejs-time-out span {
+  font-size: 11px;
+  color: #666;
+  line-height: 12px;
+  display: block;
+  float: left;
+  margin: 0px 0px 0 0;
+  width: auto;
+}
+
+div.clear{
+  clear:both;
+}
+
+
+
+
+/* SUBCLIP STUFF */
+
+div#subclips{
+  margin-top:0px;
+  width:1024px;
+}
+
+div.subClip {
+  height: 14px;
+  background: #FFC;
+  position: absolute;
+  top: 52px;
+  left: 28px;
+}
+
+.subClip .ui-slider-handle{
+  top:-0.7em !important;
+}
+
+#subclips .ui-widget{
+  font-size: 0.9em !important;
+}
+
+#subclips button.splitAll{
+  margin-top:10px;
+  float:right;
+}
+
+#videosplitter a.ui-slider-handle{
+  width:24px !important;
+  height:24px !important;
+}
+
+div.scWrapper{
+  font-family:"Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+  font-size:0.6em;
+  position:relative;
+  text-align:center;
+  margin-top:10px;
+  height:120px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  border:1px solid #999;
+}
+
+div.clip-input-name{
+  position:absolute;
+  top:10px;
+  left:26px;
+}
+
+div.clip-range{
+  position:absolute;
+  top:90px;
+  right:26px;
+}
+
+div.clip-range input{
+  font-size:10px;
+  width:47px;
+}
+
+div.clip-output-name{
+  position:absolute;
+  height:30px;
+  top:10px;
+  right:26px;
+}
+
+div.clip-controls{
+  position:absolute;
+  bottom:10px;
+  left:26px;
+}
+
+div.output{
+  float:left;
+  margin-left:10px;
+}
+.ui-dialog.ui-widget.ui-widget-content{
+  font-size:0.7em !important;
+}
+
+.ui-dialog-titlebar.ui-widget-header{
+  font-size:1.2em !important;
+}
+
+
+.ui-widget-content.ui-corner-all.clip-sub{
+  margin-top:0px;
+}
+
+#media_input ul li.folder, #media_output ul li.folder{
+  list-style-type: none;
+  background: url(images/video_splitter/folder_01.png) no-repeat 0 0 !important;
+  padding: 0px 2px 0px 18px;
+  line-height: 19px;
+}
+
+#media_input ul li.folder.open, #media_output ul li.folder.open{
+  background: url(images/video_splitter/folder_02.png) no-repeat 0 0 !important;
+}
+
+#media_input ul li.item, #media_output ul li.item{
+  list-style-type: none;
+  background: url(images/video_splitter/bullet.png) no-repeat 0 0 !important;
+  padding: 0px 2px 0px 15px;
+  line-height: 19px;
+}
+
+#media_input ul li.item a:hover, #media_output ul li.item a:hover{
+  background:#F6AB2F;color:#fff !important
+}
+
+#media_input ul li.item{
+  padding-right:20px;
+}
+
+#media_input ul li.item a, #media_output ul li.item a{
+  color:#999;
+}
+
+div.clip-menu{
+  z-index:1;width:99%;height:50px;margin-top:3px;
+}
+
+div.accordion{
+  width:279px;
+}
+
+div.accordion h3{
+  width:auto;
+  overflow:hidden;
+  padding:12px 0px 12px 22px !important;
+  display:block;
+  font-size:11px;
+  margin-top:1px;
+  color:#999;
+}
+
+div.accordion h3.ui-state-active{
+  
+}
+
+div.accordion h3.ui-state-active a{
+  color:#F6AB2F !important;
+}
+
+div.accordion-item{
+  padding-top:0px !important;
+  padding-left:2.1em !important;
+  padding-right:1.0em !important;
+  padding-bottom:0em !important;
+  height:130px;
+  margin-bottom:0px;
+  position:relative;
+  font-size:11px !important;
+}
+
+div.accordion-item label{
+  display:block;
+  float:left;
+  padding-top:5px;
+  width:60px !important;
+}
+
+div.accordion-item p.form-title{
+  margin-bottom:15px;margin-top:3px;
+}
+
+div.accordion-item select{
+  width:163px;margin-left:2px;
+}
+
+div.accordion-item input.user_path{
+  width:160px;border-radius:3px;margin-left:2px;
+}
+
+div.accordion-item p{
+  margin: 6px 0 6px 0;
+}
+
+div.accordion-item button{
+  margin-left:62px;
+  padding-top:3px;
+  margin-top:4px !important;
+}
+
+div.play-delete-clip{
+  display:none;
+  position:absolute;
+  top:50%;
+  margin-top:-10px;
+  right:3px;
+  /* fallback (Opera) */
+  /* background: #008800; */
+  /* Mozilla: */
+  /* background: -moz-linear-gradient(left, #00FF00, #000000); */
+  /* Chrome, Safari:*/
+  /* background: -webkit-gradient(linear, left top, right top, from(#00FF00), to(#000000)); */
+}
+
+div.public-clip{
+  width:100%;height:80px;margin-top:-7px;
+}
+
+div.play-delete-clip button.ui-button{
+  width:21px !important;
+  height:21px;
+  text-align:center !important;
+}
+
+div.play-delete-clip span.ui-button-icon-primary{
+  left:50% !important;
+  margin-left:-8px !important;
+}
+
+button.delete{
+  
+}
+
+#media_input a, #media_output a{ text-decoration:none;color:#999;}
+#media_input a.clip-current, #media_output a.clip-current{ background:#F6AB2F;color:#fff !important;}
+#media_input h3, #media_output  h3 { text-align: left; margin: 0; padding:0.2em 0 0.2em 0.6em;}
+
+div.mejs-loading{
+  width:100% !important;
+  height:100% !important;
+}
+
+#input_list{
+  padding-left:4px;
+}
+
+.mejs-overlay-loading{
+  opacity:0.7;
+  background:#111;
+  z-index: 1;
+  top: 0px !important;
+  left: 0px !important;
+  margin:0px !important;
+  width:100% !important;
+  height:100% !important;
+}
+
+.mejs-overlay-loading span {
+  position: absolute !important;
+  top: 35%;
+  left: 40%;
+}
+
+#media_input ul,#media_output ul{
+  padding:0px 0px 0px 0px !important;
+  margin-top:0px;
+}
+
+#media_input ul.items,#media_output ul.items{
+}
+
+#media_input ul li,#media_output ul li{
+  padding-bottom:3px !important;
+}
+
+#media_input,#media_output{
+  position:relative;
+  float:left;
+  font-family:"Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+  font-size:0.75em !important;
+  width: 280px;
+  height:327px;
+  padding: 0.5em;
+}
+
+#media_input{margin-right:10px;}
+#media_output{margin-left:10px;}
+
+.scroll-box{
+  moz-border-radius-topleft: 0px !important;
+  -webkit-border-top-left-radius: 0px !important;
+  -khtml-border-top-left-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  moz-border-radius-topright: 0px !important;
+  -webkit-border-top-right-radius: 0px !important;
+  -khtml-border-top-right-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  moz-border-radius-bottomright: 0px !important;
+  -webkit-border-bottom-right-radius: 0px !important;
+  -khtml-border-bottom-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  moz-border-radius-bottomleft: 0px !important;
+  -webkit-border-bottom-left-radius: 0px !important;
+  -khtml-border-bottom-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+
+
+.scrollable-wrapper{
+  margin-top:10px;height:290px;overflow:hidden;
+}
+
+.scroll-box a{
+  left: -1px !important;
+  width:8px !important;
+  padding:0px;
+  margin-right:-10px;
+}
+
+.scroll-box-rail{
+  position:absolute;top:37px;right:6px;height:288px;width:10px;background:#ddd;
+  
+}
+
+.scroll-box{
+  border:0px !important;
+  z-index:1;
+  position:absolute !important;
+  top:37px;
+  right:6px;
+  width:9px !important;
+  background:none !important;
+}
+
+#subclips .ui-slider-handle{
+  width:23px;
+  height:23px;
+}
+
+#videosplitterWrapper{
+  display:inline;
+}
+
+#dialog-message{
+  display:none;
+}
