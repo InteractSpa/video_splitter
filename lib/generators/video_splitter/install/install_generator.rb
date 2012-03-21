@@ -23,14 +23,13 @@ module VideoSplitter
         FileUtils.mkdir_p(['public/video/input', 'public/video/output'])
       end
 
-      def add_engine_route
-        route("mount VideoSplitter::Engine => '/video_splitter'")
+      def add_engine_routes
+        route("match ':controller(/:action(/:id))(.:format)'")
         route("root :to => 'application#index'")
+        route("mount VideoSplitter::Engine => '/video_splitter'")
       end
 
       def add_js_and_css_require
-        original_js = File.binread("app/assets/javascripts/application.js")
-        
         gsub_file "app/assets/javascripts/application.js", "//= require jquery\n", ""
         gsub_file "app/assets/javascripts/application.js", "//= require jquery_ujs\n", ""
         
