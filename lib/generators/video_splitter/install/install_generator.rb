@@ -25,6 +25,7 @@ module VideoSplitter
 
       def add_engine_route
         route("mount VideoSplitter::Engine => '/video_splitter'")
+        route("root :to => 'application#index'")
       end
 
       def add_js_and_css_require
