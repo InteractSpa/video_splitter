@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = VideoSplitter::VERSION
   s.authors     = ["Interact S.p.A."]
   s.email       = ["gianluca@interact.it"]
-  s.homepage    = "TODO"
+  s.homepage    = "http://www.interact.it"
   s.summary     = %q{Enginization of video splitter}
   s.description = %q{A video-editing utility}
 
