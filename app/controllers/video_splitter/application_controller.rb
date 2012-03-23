@@ -62,6 +62,8 @@ module VideoSplitter
         :inPath => VideoSplitter::Constants::INPUT_ROOT_PATH,
         :outPath => VideoSplitter::Constants::OUTPUT_ROOT_PATH
       }.to_json.html_safe
+    rescue => err
+      return {:application_error => err.message}.to_json.html_safe
     end
 
     def get_callbacks()

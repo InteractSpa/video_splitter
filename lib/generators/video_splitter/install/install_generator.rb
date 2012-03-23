@@ -19,6 +19,10 @@ module VideoSplitter
         copy_file "video_splitter.yml", "config/video_splitter.yml"
       end
 
+      def copy_split_done_js
+        copy_file "video-splitter.split_done.js", "app/assets/javascripts/video-splitter.split_done.js"
+      end
+
       def create_video_folders
         FileUtils.mkdir_p(['public/video/input', 'public/video/output'])
       end
@@ -34,7 +38,7 @@ module VideoSplitter
         gsub_file "app/assets/javascripts/application.js", "//= require jquery_ujs\n", ""
         
         inject_into_file "app/assets/javascripts/application.js",
-          "//= require video_splitter\n",
+          "//= require video_splitter\n//= require video-splitter.split_done\n",
           :before => "//= require_tree"
         inject_into_file 'app/assets/stylesheets/application.css',
           "\n *= require video_splitter",
