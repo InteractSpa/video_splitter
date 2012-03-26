@@ -1,13 +1,37 @@
+/********************************************************************************
+*********************************************************************************
+This file is part of VIDEO SPLITTER (VS), a video-utility released as a ruby gem
+that allows you to split video files.
+
+Copyright (c) 2012 Interact S.P.A.
+
+VS is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+VS is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with VS.  If not, see <http://www.gnu.org/licenses/>.
+
+Contact us via email at meccanica@interact.it or at
+
+Interact S.P.A.
+Via Angelo Bargoni, 78
+00153 Rome, Italy
+********************************************************************************
+********************************************************************************/
+
 (function( $ ) {
 
   var methods = {
     init : function(options) {
-
       var settings = $.extend( {
-        resizeWidth:false,
-        inPath:'',
-        outPath:''
-      }, options);
+        }, options);
 
       var el = this;
       // behaviors depend on element selector
@@ -23,9 +47,7 @@
       }.bind(this))
     },
     makeScrollable: function(options){
-      this.scrollable({
-        resizeWidth: options.resizeWidth
-      });
+      this.scrollable();
     },
     makeAccordion: function(options) {
       this.accordion({
@@ -43,7 +65,7 @@
           ui.newHeader.unbind('mouseleave');
         },
         change: function(ev, ui){
-          $(this).closest('.scrollable').scrollable('update', options);
+          $(this).closest('.scrollable').scrollable('update');
         }
       });
       // Show/Hide play and delete buttons
@@ -109,11 +131,6 @@
       })
     },
     makeTree: function(options){
-      var options = {
-        inPath: options.inPath,
-        outPath: options.outPath
-      }
-
       $('a.folderLink').click(function(ev){
         el = $(ev.currentTarget).closest('.folder');
         el.toggleClass('open');
@@ -216,7 +233,7 @@ jQuery.fn.removeFromAccordion = function() {
   el = $(this).closest('h3').length > 0 ? $(this).closest('h3') : $(this).prev('h3') ;
   el.next('.accordion-item').remove();
   el.remove()
-  scrollable.scrollable('update', options);
+  scrollable.scrollable('update');
 }
 
 // -------- Some JQuery custom utility END

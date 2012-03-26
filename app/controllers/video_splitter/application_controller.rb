@@ -1,3 +1,33 @@
+###############################################################################
+##################################################################################
+#
+# This file is part of VIDEO SPLITTER (VS), a video-utility released as a ruby gem
+# that allows you to split video files.
+#
+# Copyright (c) 2012 Interact S.P.A.
+#
+# VS is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# VS is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with VS.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Contact us via email at meccanica@interact.it or at
+#
+# Interact S.P.A.
+# Via Angelo Bargoni, 78
+# 00153 Rome, Italy
+# 
+#################################################################################
+#################################################################################
+
 module VideoSplitter
 
   require 'find'
@@ -7,8 +37,7 @@ module VideoSplitter
 
     respond_to :js, :json
 
-    # ONLY FOR  Index method to render the video splitter output
-    # outside.......
+    # render the video splitter output
     def index
       Dir.chdir(VideoSplitter::Constants::INPUT_ROOT_PATH)
       path = Pathname.new(VideoSplitter::Constants::INPUT_ROOT_PATH)
@@ -55,12 +84,9 @@ module VideoSplitter
       new_items = render_to_string({ :partial => 'output_file', :collection => messages[:successful] })
       puts new_items
       return {
-        :output_files => output_files,
         :new_items => view_context.escape_javascript(new_items), # hack for using ActionView Helper in our controller
         :successful => messages[:successful],
-        :errors => messages[:errors],
-        :inPath => VideoSplitter::Constants::INPUT_ROOT_PATH,
-        :outPath => VideoSplitter::Constants::OUTPUT_ROOT_PATH
+        :errors => messages[:errors]
       }.to_json.html_safe
     rescue => err
       return {:application_error => err.message}.to_json.html_safe

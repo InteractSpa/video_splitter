@@ -1,10 +1,38 @@
+/********************************************************************************
+*********************************************************************************
+This file is part of VIDEO SPLITTER (VS), a video-utility released as a ruby gem
+that allows you to split video files.
+
+Copyright (c) 2012 Interact S.P.A.
+
+VS is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+VS is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with VS.  If not, see <http://www.gnu.org/licenses/>.
+
+Contact us via email at meccanica@interact.it or at
+
+Interact S.P.A.
+Via Angelo Bargoni, 78
+00153 Rome, Italy
+********************************************************************************
+********************************************************************************/
+
 (function( $ ) {
 
   var methods = {
     init : function( options ) {
 
       var settings = $.extend( {
-        resizeWidth:false
+        resizeWidth:true
       }, options);
 
       //change the main div to overflow-hidden as we can use the slider now
@@ -19,13 +47,13 @@
         if(difference<=0){
           scrollableEl.css({
             marginTop:0,
-            width: options.resizeWidth ? scrollWrapper.width()-1 : ''
+            width: settings.resizeWidth ? scrollWrapper.width()-1 : ''
           });
           return true;
         }
 
         // Adjust scroll wrapper width to insert the scrollbar
-        if(options.resizeWidth) scrollableEl.css({width:scrollWrapper.width()-14});
+        if(settings.resizeWidth) scrollableEl.css({width:scrollWrapper.width()-14});
 
         var proportion = difference / scrollableEl.height();//eg 200px/500px
         var handleHeight = Math.round((1-proportion)*scrollWrapper.height());//set the proportional height - round it to make sure everything adds up correctly later on
@@ -99,14 +127,14 @@
       wr.find('.scroll-box-rail').remove();
       wr.find('.scroll-box').remove();
     },
-    update : function(options) {
+    update : function() {
       if(!this.selector.match(/\.scrollable/)) return false;
       var el = this;
       var wr = this.closest('.scrollable-wrapper');
       var sb = wr.find('.scroll-box');
       valBefore = sb.slider('option', 'value');
       el.scrollable('destroy');
-      el.scrollable(options);
+      el.scrollable();
       if(typeof valBefore == 'number') {
         $(".scroll-box", wr).slider( "option", "value", valBefore );
       }

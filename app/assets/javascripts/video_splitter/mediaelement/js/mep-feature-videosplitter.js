@@ -1,3 +1,38 @@
+/********************************************************************************
+*********************************************************************************
+This file is part of VIDEO SPLITTER (VS), a video-utility released as a ruby gem
+that allows you to split video files.
+
+Copyright (c) 2012 Interact S.P.A.
+
+VS is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+VS is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with VS.  If not, see <http://www.gnu.org/licenses/>.
+
+Contact us via email at meccanica@interact.it or at
+
+Interact S.P.A.
+Via Angelo Bargoni, 78
+00153 Rome, Italy
+********************************************************************************
+********************************************************************************/
+
+/*
+
+  A mediaelement.js plugin that adds in/out markers to it.
+  It also draws a subclip timeline using jQuery UI slider.
+
+*/
+
 (function($) {
   $.extend(MediaElementPlayer.prototype, {
     buildvideosplitter: function(player, controls, layers, media) {
@@ -62,30 +97,34 @@
     fileName: function(media){
       return unescape(media.src.split('/').slice(-1)[0]);
     },
-    fullPath: function(player){
+    fullPath: function(player, el){
       var op = player.options;
-      path = (op.clipType == 'subClip') ? op.path.outPath : op.path.inPath;
-      return path + '/' + player.options.path.filePath;
+      path = (op.clipType == 'subClip') ? outPath : inPath;
+      return path + '/' + $(el).find('input.clip-input-name').val();
     },
     createSubclip: function(player,media){
       var scContainer = $('#subclips');
       this.index = scContainer.children().length;
       var sc = $('<div class="scWrapper">' +
         '  <div class="clip-input-name">' +
-        '    File input: <strong>' + this.fileName(media) + '</strong>' +
+        '    <input type="hidden" value="'+ media.src.split('/input/').slice(-1)[0] +'" class="clip-input-name">' +
+        '    Input file : <strong>' + this.fileName(media) + '</strong>' +
         '  </div>' +
         '  <div class="clip-controls">' +
-        '    <button title="Play/Pause" id="play_'+ this.index +'" class="play" type="button">Riproduci</button>' +
-        '    <button title="Cut" id="cut_'+ this.index +'" class="cut" type="button">Taglia</button>' +
-        '    <button title="Delete" id="delete_'+ this.index +'" class="delete" type="button">Elimina</button>' +
+        // TODO: the play button is disabled for now: it's harder than espected play a subclip
+        // of a master video. Medialement provides a setCurrentTime method, but it requires a totally
+        // ended buffering. In short, is pain in the ass.
+        // ' <button title="Play/Pause" id="play_'+ this.index +'" class="play" type="button">Play</button>' +
+        '    <button title="Cut" id="cut_'+ this.index +'" class="cut" type="button">Split</button>' +
+        '    <button title="Delete" id="delete_'+ this.index +'" class="delete" type="button">Remove</button>' +
         '  </div>' +
         '  <div class="clip-output-name">' +
-        '    Nome file output: <input type="text" class="clip-output-name" name="clip-output-name-text" />' +
+        '    Output filename: <input type="text" class="clip-output-name" name="clip-output-name-text" />' +
         '  </div>' +
         '  <div class="subClip" style="width:'+ (scContainer.width()-57) +'px;" id="sc_' + this.index + '"></div>' +
         '  <div class="clip-range">' +
-        '    Taglio da: <input type="text" value="'+ this.sanitizeTC(mejs.Utility.secondsToTimeCode(this.inPoint, true)) + '" class="clip-range-from" id="clip-range-from-' + this.index + '" />' +
-        '    a:         <input type="text" value="'+ this.sanitizeTC(mejs.Utility.secondsToTimeCode(this.outPoint, true)) +'" class="clip-range-to" id="clip-range-to-' + this.index + '" />' +
+        '    Split from: <input readonly="readonly" type="text" value="'+ this.sanitizeTC(mejs.Utility.secondsToTimeCode(this.inPoint, true)) + '" class="clip-range-from" id="clip-range-from-' + this.index + '" />' +
+        '    to:         <input readonly="readonly" type="text" value="'+ this.sanitizeTC(mejs.Utility.secondsToTimeCode(this.outPoint, true)) +'" class="clip-range-to" id="clip-range-to-' + this.index + '" />' +
         '  </div>' +
         '</div>');
       if(this.index == 0){
@@ -113,11 +152,11 @@
         slide: function( event, ui ) {
           el = $(event.target);
           el.closest('.scWrapper').find('.clip-range-from').val(
-          this.sanitizeTC(mejs.Utility.secondsToTimeCode(ui.values[0], true))
-        );
+            this.sanitizeTC(mejs.Utility.secondsToTimeCode(ui.values[0], true))
+            );
           el.closest('.scWrapper').find('.clip-range-to').val(
-          this.sanitizeTC(mejs.Utility.secondsToTimeCode(ui.values[1], true))
-        );
+            this.sanitizeTC(mejs.Utility.secondsToTimeCode(ui.values[1], true))
+            );
         }.bind(this)
       })
 
@@ -127,38 +166,55 @@
         this.split(aSubClips, player, media);
       }.bind(this));
 
-      $('#play_'+ this.index).click( function(ev) {
-        el = ev.currentTarget;
-        video_preview.media.removeEventListener('progress');
-        // Buffering already complete
-        if(video_preview.media.buffered.end(0) == video_preview.media.duration){
-          this.seekToInPoint(el);
-          return true;
-        }
-        video_preview.media.addEventListener('progress', this.checkLoadingAndSeek.bind(this));
-      }.bind(this))
-
       $('#delete_'+ this.index).click(function(){
         $(this).closest('div.scWrapper').hide('highlight',{},1000, function(){
           $(this).remove();
           if($('div.scWrapper').length < 2) $('#split_all').remove();
         });
       });
+      
+      /*
+      TODO
+      $('#play_'+ this.index).click( function(ev) {
+        el = ev.currentTarget;
+        video_player.media.removeEventListener('progress');
+        // Buffering already complete
+        if(video_player.media.buffered.end(0) == video_player.media.duration){
+          this.seekToInPoint(el);
+          return true;
+        }
+        video_player.media.addEventListener('progress', this.checkLoadingAndSeek.bind(this));
+      }.bind(this))
+      */
     },
+    /*
+    TODO
     checkLoadingAndSeek: function(){
-      if(video_preview.media.buffered.end(0) / video_preview.media.duration > 0){
+      if(video_player.media.buffered.end(0) / video_player.media.duration > 0){
         $('div.mejs-loading').hide();
-        console.log(video_preview.media.buffered.end(0) / video_preview.media.duration);
+        console.log(video_player.media.buffered.end(0) / video_player.media.duration);
         this.seekToInPoint(el);
-        video_preview.media.removeEventListener('progress');
+        video_player.media.removeEventListener('progress');
       }
     },
     seekToInPoint: function(el){
       wr = $(el).closest('div.scWrapper');
       index = $('div.scWrapper').index(wr);
-      console.log("index: " + index);
-      video_preview.setCurrentTime(this.TcToSec( $('#clip-range-from-' + index).val() ) );
-      video_preview.setCurrentRail();
+      playWhat = wr.find('input.clip-input-name').val();
+      if(this.sameVideo(playWhat)){
+        video_player.setCurrentTime(this.TcToSec( $('#clip-range-from-' + index).val() ) );
+        video_player.setCurrentRail();
+      }else{
+        loadFile({
+          clipType: 'master',
+          file: playWhat,
+          from: this.TcToSec( $('#clip-range-from-' + index).val() )
+        });
+      }
+    },
+    */
+    sameVideo: function(playWhat){
+      return (playWhat == video_player.media.src.split('input/').slice(-1)[0]);
     },
     split: function(elems, player, media){
       if(elems.length == 0) return false;
@@ -170,7 +226,7 @@
       obj = [];
       $.each(elems, function(index, el) {
         obj.push({
-          input_filename: this.fullPath(player),
+          input_filename: this.fullPath(player,el),
           output_filename: $(el).find('input.clip-output-name').val(),
           timecode_input: this.TcToSec($(el).find('input.clip-range-from').val() ),
           timecode_output: this.TcToSec($(el).find('input.clip-range-to').val())
@@ -182,7 +238,6 @@
         data: {
           split_info: obj,
           callbacks: $.parseJSON( $('#video_splitter_callbacks').val() )
-          //,paths: {inPath: player.options.path.inPath, outPath: player.options.path.outPath }
         },
         dataType: 'script'
       })
@@ -212,13 +267,13 @@
     validInPoint: function(){
       if(this.inPoint == 0 && this.TcToSec(this.outTime.children().html()) == '0') return false;
       return (this.inPoint < this.outPoint);
-      //return (this.inPoint < this.TcToSec( this.inTime.children().html() ) );
+    //return (this.inPoint < this.TcToSec( this.inTime.children().html() ) );
     },
     validOutPoint: function(){
       //if(this.inPoint == 0 && this.TcToSec(this.outTime.children().html()) == '0') return false;
       return (this.inPoint < this.outPoint);
-      //return !(this.inPoint == null);
-      //return (this.getCurrentTime() >= this.TcToSec( this.outTime.children().html() ) );
+    //return !(this.inPoint == null);
+    //return (this.getCurrentTime() >= this.TcToSec( this.outTime.children().html() ) );
     },
     TcToSec: function(val){
       return mejs.Utility.timeCodeToSeconds( this.sanitizeTC(val) );
@@ -237,6 +292,11 @@
 })(mejs.$);
 
 
+/*
+
+  A simple mediaelement plugin for drawing a newline
+
+*/
 (function($) {
   $.extend(MediaElementPlayer.prototype, {
     buildnewline: function(player, controls, layers, media) {
@@ -249,34 +309,65 @@
 })(mejs.$);
 
 
-var video_preview = null;
+var video_player = null;
 
-function loadFile(options){
-  var el = options.el;
-  $('.clip-current').removeClass('clip-current');
-  $(el).addClass('clip-current');
+loadFile = function(options){
+
   var clipType = options.clipType;
   var master = (clipType == 'master');
-  var readFolder = master ? options.inPath : options.outPath ;
+  var readFolder = master ? inPath : outPath ;
   var src = '/' + readFolder.split('/public/')[1] + '/' + options.file;
-  
-  if(video_preview){
-    video_preview.pause();
-    video_preview = null;
-    $('.preview').html('');
+  var ext = options.file.split('.').slice(-1)[0];
+
+  $('.clip-current').removeClass('clip-current');
+  var el = options.el;
+  $(el).addClass('clip-current');
+
+  var settings = $.extend( {
+    src: src,
+    clipType: clipType,
+    from: options.form
+  }, options);
+
+  if(video_player){
+    var p_ext = video_player.media.src.split('.').slice(-1)[0];
+    if(p_ext != ext){
+      video_player = null;
+      $('.preview').html('');
+      buildPlayer(settings);
+      return false;
+    }
+    video_player.pause();
+    video_player.setSrc(src);
+    video_player.options.filePath = options.file;
+    video_player.options.clipType = clipType;
+    if(ext == 'wmv'){
+      video_player.load();
+    }else{
+      video_player.play();
+    }
+    return false;
   }
 
-  $('<video id="video_preview" autoplay="true" src="'+ src +'"' +
+  buildPlayer(settings);
+  
+}
+
+buildPlayer = function(settings){
+
+  var s = settings;
+  
+  $('<video id="video_player" autoplay="true" src="'+ s.src +'"' +
     'controls="controls" preload="none" width="420" height="340"></video>')
   .appendTo('.preview');
 
-  video_preview = new MediaElementPlayer('#video_preview', {
+  video_player = new MediaElementPlayer('#video_player', {
     features: ['playpause','current','progress','duration','volume','newline','videosplitter'],
-    flashName: '../flashmediaelement.swf',
-    silverlightName: '../silverlightmediaelement.xap',
+    flashName: flashName, // global
+    silverlightName: silverlightName, // global
     alwaysShowHours: true,
-    clipType: clipType,
-    path: {inPath: options.inPath, outPath: options.outPath, filePath: options.file},
+    clipType: s.clipType,
+    filePath: s.file,
     success: function(){
       $('div.mejs-overlay-play').hide();
       $('div.mejs-loading').show();
@@ -284,4 +375,15 @@ function loadFile(options){
     }
   })
 
+  /*
+  if(settings.from){
+    video_player.pause();
+    setTimeout(function(){
+      video_player.setCurrentTime(settings.from);
+      video_player.setCurrentRail();
+      video_player.play();
+    }, 300)
+  }
+  */
 }
+

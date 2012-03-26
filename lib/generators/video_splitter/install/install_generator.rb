@@ -1,3 +1,33 @@
+###############################################################################
+##################################################################################
+#
+# This file is part of VIDEO SPLITTER (VS), a video-utility released as a ruby gem
+# that allows you to split video files.
+#
+# Copyright (c) 2012 Interact S.P.A.
+#
+# VS is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# VS is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with VS.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Contact us via email at meccanica@interact.it or at
+#
+# Interact S.P.A.
+# Via Angelo Bargoni, 78
+# 00153 Rome, Italy
+#
+#################################################################################
+#################################################################################
+
 require 'fileutils'
 
 module VideoSplitter
@@ -44,6 +74,14 @@ module VideoSplitter
           "\n *= require video_splitter",
           :after => " *= require_self"
       end
+      
+      def add_favicon
+        if yes? "Can I put the video splitter favicon on your application layout?"
+          inject_into_file 'app/views/layouts/application.html.erb',
+            "\n\t<%= favicon_link_tag asset_path('video_splitter/favicon.png'), {:type => 'image/png', :rel => 'icon'} %>\n",
+            :after => "</title>"
+        end
+      end
 
       def autoload_lib
         # Autoload files in lib
@@ -51,7 +89,6 @@ module VideoSplitter
           "\n\t config.autoload_paths += %W(\#{config.root}/lib)",
           :after => "# Custom directories with classes and modules you want to be autoloadable."
       end
-
 
       def config_instructions
         say_status("", "\n\nOnce you have installed video_splitter you have to modify the config/video_splitter.yml:")
