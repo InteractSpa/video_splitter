@@ -43,7 +43,9 @@ The __video_splitter:install generator__ do some rilevant action that you need t
 In any case you have to setup the __video_splitter.yml__ with your local paths:
 
 * _ffmpeg_path_: path to your local ffmpeg binaries (tipically /usr/bin/ffmpeg)
-* _input_folders_: an hash that define a path and a label for your local input folders
+* _input_folders_: an hash that define paths and labels for your local input folders
+
+Keep in mind that input folders you specify on video_splitter.yml will be mounted on your __public/video/input__ folder.
 
 <a name="after-split-callbacks"></a>
 ### After split callbacks
