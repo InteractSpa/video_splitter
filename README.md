@@ -116,9 +116,10 @@ Once you have VS gem installed on your machine and _video_splitter.yml_ properly
 
 * Some test.
 * Grep TODO annotations.
-* Publish the VS gem to rubygems.org
 * A branch for earlier Rails version (e.g. 2.3.14)
+* Better methods documentation for Rdoc
 * Improve this readme file, possibly with a better english :)
+* Publish the VS gem to rubygems.org
 
 ## Credits
 VS is Copyright (c) 2012 Interact S.P.A.
