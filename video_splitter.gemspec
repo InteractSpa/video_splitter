@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Enginization of video splitter}
   s.description = %q{A video-editing utility}
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "bundler", "~> 1.1.0"
