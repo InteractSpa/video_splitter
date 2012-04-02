@@ -71,7 +71,7 @@
 	width: 100px;
 	height: 100px;
 	margin: -50px 0 0 -50px;
-	background: url(../img/bigplay.png) no-repeat;
+	background: url(/assets/video_splitter/mediaelement/img/bigplay.png) no-repeat;
 }
 .mejs-overlay:hover .mejs-overlay-button{
 	background-position: 0 -100px ;
@@ -84,7 +84,7 @@
 	height: 80px;
 	margin: -40px 0 0 -40px;
 	background: #333;
-	background: url(../img/background.png);
+	background: url(/assets/video_splitter/mediaelement/img/background.png);
 	background: rgba(0, 0, 0, 0.9);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(50,50,50,0.9)), to(rgba(0,0,0,0.9))); 
 	background: -webkit-linear-gradient(top, rgba(50,50,50,0.9), rgba(0,0,0,0.9));
@@ -97,7 +97,7 @@
 	display:block;
 	width: 80px;
 	height: 80px;
-	background: transparent url(../img/loading.gif) 50% 50% no-repeat;
+	background: transparent url(/assets/video_splitter/mediaelement/img/loading.gif) 50% 50% no-repeat;
 }
 
 /* End: LAYERS */
@@ -111,7 +111,7 @@
 	padding: 0;
 	bottom: 0;
 	left: 0;
-	background: url(../img/background.png);
+	background: url(/assets/video_splitter/mediaelement/img/background.png);
 	background: rgba(0, 0, 0, 0.7);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(50,50,50,0.7)), to(rgba(0,0,0,0.7)));
 	background: -webkit-linear-gradient(top, rgba(50,50,50,0.7), rgba(0,0,0,0.7)); 
@@ -150,7 +150,7 @@
 	height: 16px;
 	width: 16px;
 	border: 0;
-	background: transparent url(../img/controls.png) no-repeat;
+	background: transparent url(/assets/video_splitter/mediaelement/img/controls.png) no-repeat;
 }
 
 /* :focus for accessibility */
@@ -258,7 +258,7 @@
 	height: 15px;
 	top: -3px;
 	border: 0;
-	background: url(../img/time-handle.png) no-repeat 0 0;
+	background: url(/assets/video_splitter/mediaelement/img/time-handle.png) no-repeat 0 0;
 }
 
 .mejs-controls .mejs-time-rail .mejs-time-float {
@@ -337,7 +337,7 @@
 	display: none;
 	height: 115px;
 	width: 25px;
-	background: url(../img/background.png);
+	background: url(/assets/video_splitter/mediaelement/img/background.png);
 	background: rgba(50, 50, 50, 0.7);
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -416,7 +416,7 @@
 	right: -10px;
 	width: 130px;
 	height: 100px;
-	background: url(../img/background.png);
+	background: url(/assets/video_splitter/mediaelement/img/background.png);
 	background: rgba(50,50,50,0.7);
 	border: solid 1px transparent;
 	padding: 10px;
@@ -564,7 +564,7 @@
 
 .mejs-captions-text {
 	padding: 3px 5px;
-	background: url(../img/background.png);
+	background: url(/assets/video_splitter/mediaelement/img/background.png);
 	background: rgba(20, 20, 20, 0.8);
 
 }
