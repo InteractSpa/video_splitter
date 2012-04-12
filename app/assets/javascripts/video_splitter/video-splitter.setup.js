@@ -99,7 +99,7 @@ Via Angelo Bargoni, 78
         ev.stopPropagation();
         $("#dialog-message").createDialog().updateDialog({
           title: 'Delete file',
-          text: 'Sei sicuro di voler eliminare il file <br /><strong>' + $(this).closest('h3').attr('title') + '</strong>?',
+          text: 'Are you sure you want to delete the file<br /><strong>' + $(this).closest('h3').attr('title') + '</strong>?',
           buttons: { 
             'delete file': function() {
               var request = $.ajax({
