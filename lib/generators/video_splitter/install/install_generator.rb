@@ -61,6 +61,17 @@ module VideoSplitter
         route("match ':controller(/:action(/:id))(.:format)'")
         route("root :to => 'application#index'")
         route("mount VideoSplitter::Engine => '/video_splitter'")
+        route("match 'video_splitter' => 'application#index'")
+      end
+
+      def add_index_action
+        inject_into_file "app/controllers/application_controller.rb",
+        "\n\tdef index() end\n",
+        :after => "protect_from_forgery"
+      end
+
+      def copy_index_partial
+        copy_file "index.html.erb", "app/views/application/index.html.erb"
       end
 
       def add_js_and_css_require

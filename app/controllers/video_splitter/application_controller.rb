@@ -82,9 +82,9 @@ module VideoSplitter
       }.reverse!
       # Get new splitted items
       new_items = render_to_string({ :partial => 'output_file', :collection => messages[:successful] })
-      puts new_items
       return {
-        :new_items => view_context.escape_javascript(new_items), # hack for using ActionView Helper in our controller
+        #:new_items => view_context.escape_javascript(new_items), # hack for using ActionView Helper in our controller
+        :new_items => new_items,
         :successful => messages[:successful],
         :errors => messages[:errors]
       }.to_json.html_safe

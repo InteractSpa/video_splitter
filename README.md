@@ -26,6 +26,7 @@ Or simply include it in your _Gemfile_:
 and then run
 
 > bundle install
+
 > rails generate video_splitter:install
 
 The __video_splitter:install generator__ do some rilevant action that you need to be aware of:
