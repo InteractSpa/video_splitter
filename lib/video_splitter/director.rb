@@ -46,13 +46,13 @@ module VideoSplitter
       @split_details.each do |split_detail|
         split_one split_detail
         # After each split callback
-        @callbacks[:after_each_split].call(JSON.parse(split_detail.to_json))
+        @callbacks[:after_each_split].call(JSON.parse(split_detail.to_json)) if @callbacks[:after_each_split]
       end
       # After all splits callback
       @callbacks[:after_all_splits].call({
         :errors => self.messages[:errors],
         :successful => self.messages[:successful]
-      })
+      }) if @callbacks[:after_all_splits]
     end
 
     # Reset successful and errors attributes
