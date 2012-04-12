@@ -34,7 +34,7 @@ The __video_splitter:install generator__ do some rilevant action that you need t
 * copies the [__video_splitter.yml__](#video-splitter-configuration "click for details") in your config folder
 * copies an [__after_split.rb__](#after-split-callbacks "click for details") class in your lib/video_splitter folder
 * copies the [__video-splitter.split_done.js__](#after-split-rendering "click for details") in your assets/javascripts folder
-* copies the __index.html.erb__in your app/views/application folder   
+* copies the __index.html.erb__ in your app/views/application folder   
 and inject the __index action__ (as just to make the application runnning) in your __application_controller.rb__
 * creates __input and output video folders__ in your public/video folder
 * adds the __video_splitter routes__ in your routes.rb file
