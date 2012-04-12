@@ -66,7 +66,7 @@ module VideoSplitter
 
       def add_index_action
         inject_into_file "app/controllers/application_controller.rb",
-        "\n\tdef index() end\n",
+        "\n\n\tdef index() end\n",
         :after => "protect_from_forgery"
       end
 
