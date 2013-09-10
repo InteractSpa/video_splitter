@@ -17,7 +17,7 @@ VS requires rails 3.2 or newer, so first of all, install it:
 
 You can easily build up a brand new rails application that use video splitter by using the _video_splitter.rb_ template, executing this command:
 
-> rails my_app -m https://raw.github.com/InteractSpa/interactspa.github.com/master/templates/video_splitter/video_splitter.rb
+> rails new my_app -m https://raw.github.com/InteractSpa/interactspa.github.com/master/templates/video_splitter/video_splitter.rb
 
 Or simply include it in your _Gemfile_:
 
