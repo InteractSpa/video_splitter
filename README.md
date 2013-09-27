@@ -21,7 +21,7 @@ You can easily build up a brand new rails application that use video splitter by
 
 Or simply include it in your _Gemfile_:
 
-> gem 'video_splitter', :git => 'git@github.com:InteractSpa/video_splitter.git'
+> gem 'video_splitter', :git => 'git://github.com/InteractSpa/video_splitter.git'
 
 and then run
 
