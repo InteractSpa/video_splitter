@@ -33,24 +33,19 @@ module VideoSplitter
 
     # Return file name if it exists in input path, nil otherwise
     def self.find_file _file_name
-      Dir.chdir "#{VideoSplitter::Constants::INPUT_ROOT_PATH}"
-      if Dir.glob("*").include? _file_name
-        return "#{VideoSplitter::Constants::INPUT_ROOT_PATH}/#{_file_name}"
-      else
-        return nil
-      end
+      full_path = File.join(VideoSplitter::Constants::INPUT_ROOT_PATH, _file_name)
+      return full_path if File.file?(full_path)
+      nil
     end
 
-    # Run vlc program to play video
+    # Run vlc program to play video... hopefully
     def self.play_video _file_path
-      cmd = "vlc #{_file_path}"
-      system cmd
+      system 'vlc', _file_path
     end
 
-    # Delete file
+    # Delete file in OUTPUT_ROOT_PATH
     def self.delete _filename
-      cmd = "rm '#{VideoSplitter::Constants::OUTPUT_ROOT_PATH}/#{_filename}'"
-      system cmd
+      File.unlink(File.join(VideoSplitter::Constants::OUTPUT_ROOT_PATH, File.basename(_filename)))
     end
 
   end
